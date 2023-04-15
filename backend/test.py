@@ -40,29 +40,3 @@ def random_GamesID():
 			not_valid = False
 	return (response.json()['id'])
 
-app = FastAPI()
-
-@app.get("/rand")
-def read_root():
-
-    headers = {
-        "Authorization": f"Bearer {THEMOVIEDB_API_KEY}",
-        "Content-Type": "application/json;charset=utf-8",
-    }
-
-    response = requests.get('https://api.themoviedb.org/3/movie/76341', headers=headers)
-    print(response)
-
-    return {
-        "Type1": "x1",
-        "ID1": "y1",
-        "Typ2": "x2",
-        "ID2": "y2",
-        "score": 100,
-        "total": 1000,
-    }
-
-
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Union[str, None] = None):
-    return {"item_id": item_id, "q": q}
