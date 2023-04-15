@@ -1,4 +1,4 @@
-# Creating new DB with new Relation objects
+# Creating new DB with new Relation objects and methods to update and add Relations
 
 import sqlite3
 import Relation.py
@@ -37,9 +37,27 @@ def create_relation_table(dbConn):
 
 
 # Insert row into media database
-def insert_row(dbConn): 
+def create_relation(dbConn, Relation): 
+     
+    cursor = dbConn.cursor()
+    
+    relation_sql = '''INSERT INTO Relations (ID_One, Type_One, ID_Two, Type_Two, Score, Total_Votes)
+                      VALUES (?, ?, ?, ?, ?, ?)'''
+    cursor.execute(relation_sql, Relation)
+    dbConn.commit()
     return None 
 
-# Remove row from media database
-def remove_row(dbConn):
-    return None 
+# Update a Relation in the Relations database
+def update_relation(dbConn, Relation): 
+
+    cursor = dbConn.cursor()
+
+    relation_sql = ''' UPDATE Relations
+                       SET Type_One = ? ,  
+                           Type_Two = ? , 
+                           Score = ? , 
+                           Total_Votes = ?
+                        WHERE ID_One = ? AND ID_Two = ?'''
+
+    cursor.execute(relation_sql, Relation)
+    dbConn.commit()
