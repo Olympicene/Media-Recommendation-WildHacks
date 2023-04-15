@@ -20,8 +20,26 @@ def create_connection(db_file):
 # Creating Relation table given connection to a database
 def create_relation_table(dbConn): 
 
-    sql_create_relations_table = """ CREATE TABLE IF NOT EXISTS Relations (
-                                     id 
+    create_relations_table_sql = """ CREATE TABLE IF NOT EXISTS Relations (
+                                     ID_One integer NOT NULL,
+                                     Type_One text NOT NULL, 
+                                     ID_Two integer NOT NULL, 
+                                     Type_Two text NOT NULL, 
+                                     Score integer NOT NULL, 
+                                     Total_Votes integer NOT NULL 
+                                    ); """ 
 
-    )"""
+    try: 
+        c = dbConn.cursor()
+        c.execute(create_relations_table_sql)
+    except Error as e: 
+        print(e)
 
+
+# Insert row into media database
+def insert_row(dbConn): 
+    return None 
+
+# Remove row from media database
+def remove_row(dbConn):
+    return None 

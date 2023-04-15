@@ -25,10 +25,10 @@ class Relation:
     def __init__(self, dbConn, Type_One, ID_One, Type_Two, ID_Two, Score, Total_Votes): 
       self.Type_One =  Type_One
       self.ID_One = ID_One
-      self.TypeTwo = TypeTwo
+      self.Type_Two = Type_Two
       self.ID_Two = ID_Two
       self.Score = Score
-      self.TotalVotes = TotalVotes
+      self.Total_Votes = Total_Votes
 
     @property
     def Type_One(self):
@@ -53,3 +53,5 @@ class Relation:
     @property 
     def TotalVotes(self): 
         return self.TotalVotes
+
+
