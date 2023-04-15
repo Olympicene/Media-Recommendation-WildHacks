@@ -1,16 +1,42 @@
-import React from 'react';
 
+// //imported from Figma
+// const CardComponent = () => {
+//   return (
+//     <div className="card">
+//       {/* Card content goes here */}
+//     </div>
+//   );
+// };
 
-function App(){
-  return(
-    <Frame1 loremipsum1="lorem ipsum" loremipsum2="lorem ipsum"
-      buttonsProps={frame1Data.buttonsProps}
-      buttons2Props={frame1Data.buttons2Props}
-      buttons3Props={frame1Data.buttons3Props}
-    
-    />
-  );
-}
+// const CardsComponent = () => {
+//   return (
+//     <div className="cards">
+//       {/* Cards content goes here */}
+//     </div>
+//   );
+// };
 
+// const CardAreaComponent = () => {
+//   return (
+//     <div className="card-area">
+//       {/* Card area content goes here */}
+//     </div>
+//   );
+// };
 
-export default App;
+// const CardContentComponent = () => {
+//   return (
+//     <div className="card-content">
+//       {/* Card content goes here */}
+//     </div>
+//   );
+// };
+
+// export default {
+//   CardComponent,
+//   CardsComponent,
+//   CardAreaComponent,
+//   CardContentComponent,
+//   MoviePosterComponent
+// };
+
