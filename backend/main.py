@@ -4,6 +4,8 @@ import random
 from fastapi import FastAPI
 from dotenv import load_dotenv
 from pydantic import BaseModel
+import database
+import sqlite3
 
 load_dotenv()
 THEMOVIEDB_API_KEY = os.getenv('THEMOVIEDB_API_KEY')
@@ -85,6 +87,5 @@ async def down(item: Item):
 
 @app.post("/upvote/")
 async def up(item: Item):
-    return item
-
+	return item
 # print(random_MovieID())
