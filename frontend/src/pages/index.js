@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -41,41 +42,39 @@ export default function Home() {
 
 
 
+      <div style={{display : 'flex'}}>
+          <div className={styles.grid}>
+            <a
+              // href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+              className={styles.button1}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FontAwesomeIcon icon="fa-solid fa-thumbs-up" />
 
-        <div className={styles.grid}>
-          <a
-            // href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.button1}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <p className={inter.className}>
-              Like <span>-&gt;</span>
-            </p>
+            </a>
 
-          </a>
+            <a
+              className={styles.button2}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FontAwesomeIcon icon="fa-solid fa-question" />
 
-          <a
-            className={styles.button2}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <p className={inter.className}>
-              Don't Know <span>-&gt;</span>
-            </p>
+            </a>
 
-          </a>
+            <a
+              className={styles.button3}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FontAwesomeIcon icon="fa-solid fa-thumbs-down" />
+              {/* <p className={inter.className}>
+                Dislike <span>-&gt;</span>
+              </p> */}
 
-          <a
-            className={styles.button3}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <p className={inter.className}>
-              Dislike <span>-&gt;</span>
-            </p>
-
-          </a>
+            </a>
+          </div>
         </div>
       </main>
     </>

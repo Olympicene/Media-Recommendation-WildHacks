@@ -8,6 +8,7 @@
   background-color: #0D0907;
   width: fit-content;
   height: fit-content;
+  overflow:hidden;
 }
 
 .description {
@@ -50,6 +51,7 @@
 }
 
 .card {
+  display: flex;
   padding: 1rem 1.2rem;
   padding-right: 2rem;
   padding-left: 2rem;
@@ -84,6 +86,24 @@
 }
 */
 
+.button1::before {
+  content: "👍"; /* Add thumbs up emoji */
+  display: inline-block;
+  margin-right: 8px; /* Add margin for spacing */
+}
+
+.button2::before {
+  content: "❓"; /* Add question mark emoji */
+  display: inline-block;
+  margin-right: 8px; /* Add margin for spacing */
+}
+
+.button3::before {
+  content: "👎"; /* Add thumbs down emoji */
+  display: inline-block;
+  margin-right: 8px; /* Add margin for spacing */
+}
+
 
 .button1 {
   display: flex;
@@ -94,7 +114,7 @@
   height: 100px; /* set the height of the button */
   border-radius: 10px; /* set the border radius for rounded corners */
   background-color: #666666 ;/* set the background color of the button */
-  background-image: url(http://fontawesome.com/icons/thumbs-up);
+  background-image: url('/public/like.svg');
   color: #fff; /* set the text color of the button */
   font-size: 1.5rem; /* set the font size of the button */
   font-weight: bold; /* set the font weight of the button */
@@ -116,7 +136,7 @@
   height: 100px; /* set the height of the button */
   border-radius: 10px; /* set the border radius for rounded corners */
   background-color: #666666 ;/* set the background color of the button */
-  background-image: url(http://fontawesome.com/icons/question);
+  background-image: url('/public/question.svg');
   color: #fff; /* set the text color of the button */
   font-size: 1.5rem; /* set the font size of the button */
   font-weight: bold; /* set the font weight of the button */
@@ -139,7 +159,7 @@
   height: 100px; /* set the height of the button */
   border-radius: 10px; /* set the border radius for rounded corners */
   background-color: #666666 ;/* set the background color of the button */
-  background-image: url(http://fontawesome.com/icons/thumbs-down);
+  background-image: url('/public/dislike.svg');
   color: #fff; /* set the text color of the button */
   font-size: 1.5rem; /* set the font size of the button */
   font-weight: bold; /* set the font weight of the button */
