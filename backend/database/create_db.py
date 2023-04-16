@@ -113,6 +113,17 @@ def top_ten(dbConn):
 
     return top_10
 
+def grab_rand_relation(dbConn): 
+    dbCursor = dbConn.cursor()
+
+    rand_sql = '''SELECT * FROM Relations ORDER BY RANDOM() LIMIT 1'''
+
+    dbCursor.execute(rand_sql)
+
+    rand = cursor.fetchall()
+
+    return rand
+
 
 
 
