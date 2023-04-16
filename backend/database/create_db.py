@@ -47,13 +47,20 @@ def create_relation(dbConn, Relation):
                       VALUES (?, ?, ?, ?, ?, ?)'''
     cursor.execute(relation_sql, [Relation.ID_One, Relation.Type_One, Relation.ID_Two, Relation.Type_Two, Relation.Score, Relation.Total_Votes])
     dbConn.commit()
+
+def check_if_in_db(dbConn, Relation): 
+
+    cursor = dbConn.cursor()
+
+    in_db_sql = '''SELECT * FROM Relations WHERE ID_One = ? AND ID_Two = ?'''
+
+    cursor.execute(in_db_sql)
+    lists = cursor.fetchall()
+    print(lists)
+
+    if lists == None or len(lists) == 0:
+        create_relation(dbConn, Relation)
     
-def insert_new_relation(): 
-    return None 
-
-def check_if_in_db(): 
-    return None
-
 def upvote_db(): 
     return None
 
