@@ -142,7 +142,8 @@ def top_ten(dbConn):
 
     top_scores = cursor.fetchall()
 
-    return top_scores
+    list_of_dicts = convert_to_pair_dict(top_scores)
+    return list_of_dicts
 
 # top ten TotalVotes
 def top_totals(dbConn): 
@@ -153,7 +154,8 @@ def top_totals(dbConn):
 
     top_votes = cursor.fetchall()
 
-    return top_votes
+    list_of_dicts = convert_to_pair_dict(top_votes)
+    return list_of_dicts
 
 # top ten top_avgs
 def top_avgs(dbConn): 
@@ -164,6 +166,23 @@ def top_avgs(dbConn):
 
     top_timestamps = cursor.fetchall()
 
-    return top_timestamps 
+    list_of_dicts = convert_to_pair_dict(top_timestamps)
+    return list_of_dicts
+
+# converting db tuples to pair dictionaries
+def convert_to_pair_dict(pair_tuples): 
+    
+    pair_dicts = []
+    for pair in pair_tuples: 
+        pair_dict = { 
+                    "rowID1" = pair[0]
+                    "rowID2" = pair[1]
+                    "ts" = pair[2]
+                    "score" = pair[3]
+                    "votes" = pair[4]
+                    }
+        pair_dicts.append(pair_dict)
+    return pair_dicts
+    
 
 
