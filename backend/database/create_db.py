@@ -60,17 +60,36 @@ def check_if_in_db(dbConn, Relation):
 
     if lists == None or len(lists) == 0:
         create_relation(dbConn, Relation)
+        return true
+    else: 
+        return true
 
 def upvote_db(dbConn, Relation): 
-    if check_if_in_db(dbConn, Relation): 
+    if check_if_in_db(dbConn, Relation):
+        new_score = Relation.Score + 1
+        new_total_votes = Relation.Total_Votes + 1  
         update_sql = '''UPDATE Relations 
-                        SET Score = ?
+                        SET Score = ? ,
                         Total_Votes = ?'''
+        cursor = dbConn.cursor()
+
+        cursor.execute(update_sql, [new_score, new_total_votes])
     else: 
         print("Relation doesn't exist.")
 
 def downvote_db(): 
-    return None 
+    if check_if_in_db(dbConn, Relation): 
+        new_score = Relation.Score - 1
+        new_total_votes = Relation.Total_Votes + 1 
+        update_sql = '''UPDATE Relations 
+                        SET Score = ? ,
+                        Total_Votes = ?'''
+        cursor = dbConn.cursor()
+
+        cursor.execute(update_sql, [new_score, new_total_votes])
+    else: 
+        print("Relation doesn't exist")
+
 
 
 # Update a Relation in the Relations database
