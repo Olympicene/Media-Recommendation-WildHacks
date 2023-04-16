@@ -1,9 +1,9 @@
 <template>
 	<nav class="content">
-		<router-link to="/calories">Hot</router-link>	
+		<router-link to="/top">Top Rated</router-link>	
 		<router-link to="/new">New</router-link>	
-		<router-link to="/top">Top</router-link>
-		<router-link to="/calories">Random</router-link>	
+		<router-link to="/seen">Most Viewed</router-link>
+		<router-link to="/">Random</router-link>	
 		
 		<div class="nav-right">
 			<router-link to="/calories">Create</router-link>

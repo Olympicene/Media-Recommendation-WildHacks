@@ -19,13 +19,13 @@ export default {
   name: 'NameCards',
   methods: {
 	onRefreshButton (event) {
-		this.$emit('refreshed', 'somwValue')
+		this.$emit('refreshed', 'someValue')
 	},
 	onDownvote (event) {
-		this.$emit('downvoted', 'somwValue')
+		this.$emit('downvoted', 'someValue')
 	},
 	onUpvote (event) {
-		this.$emit('upvoted', 'somwValue')
+		this.$emit('upvoted', 'someValue')
 	}
   }
 }

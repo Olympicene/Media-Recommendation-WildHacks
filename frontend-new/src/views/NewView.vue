@@ -1,8 +1,8 @@
 <template>
-  <RelationCards :imageURL1="media1.imageURL" :imageURL2="media2.imageURL"></RelationCards>
-  <NameCards :name1="media1.name" :name2="media2.name" :type1="media1.type" :type2="media2.type"></NameCards>
-  <ButtonSelect @refreshed="refreshMedia"></ButtonSelect>
-</template>   
+	<RelationCards :imageURL1="media1.imageURL" :imageURL2="media2.imageURL"></RelationCards>
+	<NameCards :name1="media1.name" :name2="media2.name" :type1="media1.type" :type2="media2.type"></NameCards>
+	<ButtonSelect @refreshed="refreshMedia" @upvoted="upvotePair" @downvoted="downvotePair"></ButtonSelect>
+</template>
 
 <script>
 // @ is an alias to /src
@@ -12,7 +12,7 @@ import ButtonSelect from '@/components/ButtonSelect.vue';
 import axios from "axios";
 
 export default {
-  name: 'HomeView',
+  name: 'New',
   data() {
     return {
       media1: {},
@@ -21,7 +21,6 @@ export default {
   },
   methods: {
     refreshMedia() {
-      console.log("this is a sign")
       axios.get('http://127.0.0.1:8000/rand')
       .then(response => {
         this.media1 = response.data
@@ -29,28 +28,40 @@ export default {
         console.log(error);
       });
 
-    axios.get('http://127.0.0.1:8000/rand')
+      axios.get('http://127.0.0.1:8000/rand')
       .then(response => {
         this.media2 = response.data
       }, error => {
         console.log(error);
       });
+    },
+    upvotePair() {
+      axios.post('http://127.0.0.1:8000/upvote/', {
+        rowID1: this.media1.rowid,
+        rowID2: this.media2.rowid
+      })
+      .then(response => {
+        console.log(response.data)
+      }, error => {
+        console.log(error);
+      });
+      this.refreshMedia()
+    },
+    downvotePair() {
+      axios.post('http://127.0.0.1:8000/downvote/', {
+        rowID1: this.media1.rowid,
+        rowID2: this.media2.rowid
+      })
+      .then(response => {
+        console.log(response.data)
+      }, error => {
+        console.log(error);
+      });
+      this.refreshMedia()
     }
   },
   created() {
-    axios.get('http://127.0.0.1:8000/rand')
-      .then(response => {
-        this.media1 = response.data
-      }, error => {
-        console.log(error);
-      });
-
-    axios.get('http://127.0.0.1:8000/rand')
-      .then(response => {
-        this.media2 = response.data
-      }, error => {
-        console.log(error);
-      });
+    this.refreshMedia()
   },
   components: {
     ButtonSelect,
