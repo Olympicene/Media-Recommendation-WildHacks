@@ -11,6 +11,7 @@ filePath.touch(exist_ok= True)
 # connect and create media table
 dbconn = db.create_connection(DB_FILE)
 db.create_media_table(dbconn)
+db.create_pair_table(dbconn)
 
 db.add_media(dbconn, random.Movie())
 db.add_media(dbconn, random.TVShow())

@@ -24,10 +24,9 @@ def Movie():
 			media_object = {
 				"type": 'movie', 
 				"name": response['original_title'], 
-				"id": response['id'], 
 				"imageURL": f"https://image.tmdb.org/t/p/original{response['poster_path']}"
 				}
-			if(response['poster_path'] != "None"):
+			if(response['poster_path'] is not None):
 				not_valid = False
 		except Exception as e: 
 			print(e)
@@ -43,12 +42,11 @@ def TVShow():
 
 		try:
 			media_object = {
-				"type": 'tv_show', 
+				"type": 'TV show', 
 				"name": response['name'], 
-				"id": response['id'], 
 				"imageURL": f"https://image.tmdb.org/t/p/original{response['poster_path']}"
 			}
-			if(response['poster_path'] != "None"):
+			if(response['poster_path'] is not None):
 				not_valid = False
 		except Exception as e: 
 			print(e)
@@ -66,7 +64,6 @@ def Game():
 			media_object = {
 				"type": 'videogame',  
 				"name": response['name'], 
-				"id": response['id'], 
 				"imageURL": response['background_image']
 			}
 			not_valid = False

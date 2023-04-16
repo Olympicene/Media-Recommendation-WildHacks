@@ -1,6 +1,5 @@
 import sqlite3
 from sqlite3 import Error
-import time 
 
 # Creating connection to database given
 def create_connection(db_file):
@@ -17,7 +16,6 @@ def create_media_table(dbConn):
     create_table_sql = """ CREATE TABLE IF NOT EXISTS Media (
                                      Type TEXT NOT NULL,
                                      Name TEXT NOT NULL, 
-                                     ID INTEGER NOT NULL, 
                                      ImageURL TEXT NOT NULL
                                     ); """ 
     try: 
@@ -26,113 +24,111 @@ def create_media_table(dbConn):
     except Exception as e: 
         print(e)
 
-# Insert row into media database
+# Creating media table given connection to a database
+def create_pair_table(dbConn): 
+    create_table_sql = """ CREATE TABLE IF NOT EXISTS Pairs (
+                                     RowID1 INTEGER NOT NULL,
+                                     RowID2 INTEGER NOT NULL, 
+                                     Timestamp INTEGER NOT NULL,
+                                     Score INTEGER NOT NULL,
+                                     TotalVotes INTEGER NOT NULL
+                                    ); """ 
+    try: 
+        c = dbConn.cursor()
+        c.execute(create_table_sql)
+    except Exception as e: 
+        print(e)
+
+# Insert row into media table
 def add_media(dbConn, Media): 
      
     cursor = dbConn.cursor()
     
-    relation_sql = '''INSERT INTO Media (Type, Name, ID, ImageURL)
-                      VALUES (?, ?, ?, ?)'''
+    relation_sql = '''INSERT INTO Media (Type, Name, ImageURL)
+                      VALUES (?, ?, ?)'''
     
-    cursor.execute(relation_sql, [Media['type'], Media['name'], Media['id'], Media['imageURL']])
+    cursor.execute(relation_sql, [Media['type'], Media['name'], Media['imageURL']])
     dbConn.commit()
 
-# get random media from database
+# get random media from media table
 def random_media(dbConn): 
     cursor = dbConn.cursor()
 
-    in_db_sql = '''SELECT Type, Name, ID, ImageURL FROM Media
+    in_db_sql = '''SELECT rowid, Type, Name, ImageURL FROM Media
                    ORDER BY random() 
                    LIMIT 1;'''
 
     cursor.execute(in_db_sql)
-    type, name, id, imageURL = cursor.fetchone()
+    rowid, type, name, imageURL = cursor.fetchone()
 
     return {
+        "rowid": rowid,
         "type": type,  
         "name": name,
-        "id": id, 
         "imageURL": imageURL
     }
 
-#def upvote_db(dbConn, Relation): 
-#    if get_from_db(dbConn, Relation):
-#        new_score = Relation.Score + 1
-#        new_total_votes = Relation.Total_Votes + 1  
-#        update_sql = '''UPDATE Relations 
-#                        SET Score = ? ,
-#                        Total_Votes = ?'''
-#        cursor = dbConn.cursor()
-#        cursor.execute(update_sql, [new_score, new_total_votes])
-#    else: 
-#        print("Relation doesn't exist.")
+# get specific from database
+def get_row(dbConn, row): 
+    cursor = dbConn.cursor()
 
+    in_db_sql = '''SELECT rowid, Type, Name, ImageURL FROM Media
+                   WHERE rowid = ?
+                   LIMIT 1;'''
 
-#def downvote_db(dbConn, Relation): 
-#    if get_from_db(dbConn, Relation): 
-#        new_score = Relation.Score - 1
-#        new_total_votes = Relation.Total_Votes + 1 
-#        update_sql = '''UPDATE Relations 
-#                        SET Score = ? ,
-#                        Total_Votes = ?'''
-#        cursor = dbConn.cursor()
-#        cursor.execute(update_sql, [new_score, new_total_votes])
-#    else: 
-#        print("Relation doesn't exist")
+    cursor.execute(in_db_sql, [row])
+    rowid, type, name, imageURL = cursor.fetchone()
 
-## Update a Relation in the Relations database
-#def update_relation(dbConn, Relation): 
-#    cursor = dbConn.cursor()
-#    relation_sql = ''' UPDATE Relations
-#                       SET Type_One = ? ,  
-#                           Type_Two = ? , 
-#                           Score = ? , 
-#                           Total_Votes = ?
-#                        WHERE ID_One = ? AND ID_Two = ?'''
-#    cursor.execute(relation_sql, Relation)
-#    dbConn.commit()
+    return {
+        "rowid": rowid,
+        "type": type,  
+        "name": name,
+        "imageURL": imageURL
+    }
 
-#def convert_to_dict(Relation):
-#    relationdict = {
-#                    "id_1": Relation.ID_One,
-#                    "type_1": Relation.Type_One,
-#                    "id_2": Relation.ID_Two,
-#                    "type_2": Relation.Type_Two,
-#                    "score": Relation.Score,
-#                    "totalvotes": Relation.Total_Votes
-#                    }
+# Insert row into pair table
+def add_pair(dbConn, Pair): 
+     
+    cursor = dbConn.cursor()
     
-#    return relationdict
+    relation_sql = '''INSERT INTO Pairs (RowID1, RowID2, Timestamp, Score, TotalVotes)
+                      VALUES (?, ?, ?, ?, ?)'''
+    
+    cursor.execute(relation_sql, [Pair['rowID1'], Pair['rowID2'], Pair['timestamp'], Pair['score'], Pair['totalVotes']])
+    dbConn.commit()
 
-#def convert_to_relation(relationdict):
-#    relation_obj = relation.Relation(relationdict.get("id_1"), relationdict.get("type_1"), relationdict.get("id_2"), relationdict.get("type_2"), relationdict.get("score"),
-#                                     relationdict.get("totalvotes"))
-#    return relation_obj
+# Check if a pair exists
+def pair_exists(dbConn, Pair): 
+    cursor = dbConn.cursor()
 
-#def top_ten(dbConn):
-#    dbCursor = dbConn.cursor()
+    in_db_sql = '''SELECT * FROM Pairs WHERE RowID1 = ? AND RowID2 = ?'''
 
-#    top_sql = '''SELECT * FROM Relations ORDER BY Time_Stamp LIMIT 10'''
+    cursor.execute(in_db_sql, [Pair['rowID1'], Pair['rowID2']])
+    lists = cursor.fetchall()
 
-#    dbCursor.execute(top_sql)
+    if lists == None or len(lists) == 0:
+        return False
+    else: 
+        return True 
 
-#    top_10 = dbCursor.fetchall()
+# upvote
+def downvote(dbConn, Pair): 
+    update_sql = '''UPDATE Pairs
+                    SET 
+                    Score = Score - 1 , TotalVotes = TotalVotes + 1
+                    WHERE
+                    RowID1 = ? AND RowID2 = ?'''
+    cursor = dbConn.cursor()
+    cursor.execute(update_sql, [Pair['rowID1'], Pair['rowID2']])
+    dbConn.commit()
 
-#    return top_10
-
-#def grab_rand_relation(dbConn): 
-#    dbCursor = dbConn.cursor()
-
-#    rand_sql = '''SELECT * FROM Relations ORDER BY RANDOM() LIMIT 1'''
-
-#    dbCursor.execute(rand_sql)
-
-#    rand = dbCursor.fetchall()
-
-#    return rand
-
-
-
-
-
-        
+# downvote
+def upvote(dbConn, Pair): 
+    update_sql = '''UPDATE Pairs
+                    SET 
+                    Score = Score + 1 , TotalVotes = TotalVotes + 1
+                    WHERE
+                    RowID1 = ? AND RowID2 = ?'''
+    cursor = dbConn.cursor()
+    cursor.execute(update_sql, [Pair['rowID1'], Pair['rowID2']])
+    dbConn.commit()
