@@ -132,3 +132,38 @@ def upvote(dbConn, Pair):
     cursor = dbConn.cursor()
     cursor.execute(update_sql, [Pair['rowID1'], Pair['rowID2']])
     dbConn.commit()
+
+# top ten Scores 
+def top_ten(dbConn): 
+    cursor = dbConn.cursor()
+
+    top_ten_sql = ''' SELECT * FROM Pairs ORDER BY Score LIMIT 10 '''
+    cursor.execute(top_ten_sql)
+
+    top_scores = cursor.fetchall()
+
+    return top_scores
+
+# top ten TotalVotes
+def top_totals(dbConn): 
+    cursor = dbConn.cursor()
+
+    top_totals_sql = ''' SELECT * FROM Pairs ORDER BY TotalVotes LIMIT 10 '''
+    cursor.execute(top_totals_sql)
+
+    top_votes = cursor.fetchall()
+
+    return top_votes
+
+# top ten top_avgs
+def top_avgs(dbConn): 
+    cursor = dbConn.cursor()
+
+    top_timestamps_sql = ''' SELECT * FROM Pairs ORDER BY TimeStamp LIMIT 10 DESC '''
+    cursor.execute(top_timestamps_sql)
+
+    top_timestamps = cursor.fetchall()
+
+    return top_timestamps 
+
+
