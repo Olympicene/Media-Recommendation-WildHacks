@@ -1,15 +1,15 @@
 ''' Test cases for the create_db and relation files. '''
 
-import relation.py 
-import create_db.py
+import relation
+import create_db
 
 def test_create_connection_valid_path():
     # Arrange
-    db_file = "test_db.db"
+    db_file = "media.db"
 
     # Act
     conn = create_connection(db_file)
-
+    print ("Yes sir")
     # Assert
     assert isinstance(conn, sqlite3.Connection)
 

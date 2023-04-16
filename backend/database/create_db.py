@@ -1,8 +1,10 @@
 # Creating new DB with new Relation objects and methods to update and add Relations
 
 import sqlite3
-import Relation.py
+import relation
 from sqlite3 import Error
+
+
 
 # Creating connection to database given
 def create_connection(db_file):
