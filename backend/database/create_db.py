@@ -1,6 +1,8 @@
 import sqlite3
 import relation
 from sqlite3 import Error
+import time 
+
 # Creating connection to database given
 def create_connection(db_file):
     dbConn = None 
@@ -30,9 +32,10 @@ def create_relation(dbConn, Relation):
      
     cursor = dbConn.cursor()
     
-    relation_sql = '''INSERT INTO Relations (ID_One, Type_One, ID_Two, Type_Two, Score, Total_Votes)
+    relation_sql = '''INSERT INTO Relations (ID_One, Type_One, ID_Two, Type_Two, Score, Total_Votes, Time_Stamp)
                       VALUES (?, ?, ?, ?, ?, ?)'''
-    cursor.execute(relation_sql, [Relation.ID_One, Relation.Type_One, Relation.ID_Two, Relation.Type_Two, Relation.Score, Relation.Total_Votes])
+    ts = time.time()
+    cursor.execute(relation_sql, [Relation.ID_One, Relation.Type_One, Relation.ID_Two, Relation.Type_Two, Relation.Score, Relation.Total_Votes, ts])
     dbConn.commit()
 def get_from_db(dbConn, Relation): 
     cursor = dbConn.cursor()
@@ -98,4 +101,20 @@ def convert_to_relation(relationdict):
     relation_obj = relation.Relation(relationdict.get("id_1"), relationdict.get("type_1"), relationdict.get("id_2"), relationdict.get("type_2"), relationdict.get("score"),
                                      relationdict.get("totalvotes"))
     return relation_obj
+
+def top_ten(dbConn):
+    dbCursor = dbConn.cursor()
+
+    top_sql = '''SELECT * FROM Relations ORDER BY Time_Stamp LIMIT 10'''
+
+    dbCursor.execute(top_sql)
+
+    top_10 = cursor.fetchall()
+
+    return top_10
+
+
+
+
+
         
