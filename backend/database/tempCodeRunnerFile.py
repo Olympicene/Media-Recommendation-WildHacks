@@ -1,9 +1,9 @@
-def create_relation(dbConn, relation): 
-     
-    cursor = dbConn.cursor()
-    
-    relation_sql = '''INSERT INTO Relations (ID_One, Type_One, ID_Two, Type_Two, Score, Total_Votes)
-                      VALUES (?, ?, ?, ?, ?, ?)'''
-    cur.execute(relation_sql, relation)
-    conn.commit()
-    return None 
+def test_create_connection_valid_path():
+    # Arrange
+    db_file = "test_db.db"
+
+    # Act
+    conn = create_connection(db_file)
+
+    # Assert
+    assert isinstance(conn, sqlite3.Connection)
