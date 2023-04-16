@@ -46,11 +46,7 @@ def get_from_db(dbConn, Relation):
         create_relation(dbConn, Relation)
         return Relation
     else: 
-<<<<<<< HEAD
-         return Relation 
-=======
         return Relation 
->>>>>>> 135c9063abaaf9337bf2f251e90e35acb10bc150
 
 def upvote_db(dbConn, Relation): 
     if get_from_db(dbConn, Relation):
@@ -99,7 +95,7 @@ def convert_to_dict(Relation):
     return relationdict
 
 def convert_to_relation(relationdict):
-    relation_obj = relation.Relation(relationdict[0], relationdict[1], relationdict[2], relationdict[3], relationdict[4],
-                                     relationdict[[5]])
+    relation_obj = relation.Relation(relationdict.get("id_1"), relationdict.get("type_1"), relationdict.get("id_2"), relationdict.get("type_2"), relationdict.get("score"),
+                                     relationdict.get("totalvotes"))
     return relation_obj
         

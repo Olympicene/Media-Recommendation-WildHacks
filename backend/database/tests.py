@@ -88,6 +88,20 @@ def test_convert_to_dict():
     dict = create_db.convert_to_dict(relation_obj)
     print(dict)
     
+def test_convert_to_relation():
+    relation_dict = {
+                    "id1": 786,
+                    "type1": "An optional description",
+                    "id2": 45,
+                    "type2": "jsdfsdf",
+                    "score": 0,
+                    "totalvotes": 0
+                }
+    relation = create_db.convert_to_relation(relation_dict)
+    print(relation)
+    
 test_convert_to_dict()
+test_convert_to_relation()
+
 
 
