@@ -22,8 +22,8 @@ import sqlite3
 
 class Relation: 
 
-    def __init__(self, dbConn, Type_One, ID_One, Type_Two, ID_Two, Score, Total_Votes): 
-      self.Type_One =  Type_One
+    def __init__(self, ID_One, Type_One, ID_Two, Type_Two, Score, Total_Votes): 
+      self.Type_One = Type_One
       self.ID_One = ID_One
       self.Type_Two = Type_Two
       self.ID_Two = ID_Two
