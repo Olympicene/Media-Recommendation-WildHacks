@@ -1,5 +1,6 @@
 import create_db
 
+
 def main(): 
     
     database = "media.db"
@@ -12,3 +13,4 @@ if dbConn is not None:
     create_relation_table(dbConn)
 else: 
     print("Error! Can't establish the database connection.")
+
