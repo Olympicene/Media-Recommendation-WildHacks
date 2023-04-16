@@ -46,7 +46,11 @@ def get_from_db(dbConn, Relation):
         create_relation(dbConn, Relation)
         return Relation
     else: 
+<<<<<<< HEAD
          return Relation 
+=======
+        return Relation 
+>>>>>>> 135c9063abaaf9337bf2f251e90e35acb10bc150
 
 def upvote_db(dbConn, Relation): 
     if get_from_db(dbConn, Relation):
