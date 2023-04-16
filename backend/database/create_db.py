@@ -9,7 +9,7 @@ from sqlite3 import Error
 # Creating connection to database given
 def create_connection(db_file):
 
-    dbConn == None 
+    dbConn = None 
 
     try: 
         dbConn = sqlite3.connect(db_file)
@@ -23,12 +23,12 @@ def create_connection(db_file):
 def create_relation_table(dbConn): 
 
     create_relations_table_sql = """ CREATE TABLE IF NOT EXISTS Relations (
-                                     ID_One integer NOT NULL,
-                                     Type_One text NOT NULL, 
-                                     ID_Two integer NOT NULL, 
-                                     Type_Two text NOT NULL, 
-                                     Score integer NOT NULL, 
-                                     Total_Votes integer NOT NULL 
+                                     ID_One INTEGER NOT NULL,
+                                     Type_One TEXT NOT NULL, 
+                                     ID_Two INTEGER NOT NULL, 
+                                     Type_Two TEXT NOT NULL, 
+                                     Score INTEGER NOT NULL, 
+                                     Total_Votes INTEGER NOT NULL 
                                     ); """ 
 
     try: 
@@ -45,9 +45,21 @@ def create_relation(dbConn, Relation):
     
     relation_sql = '''INSERT INTO Relations (ID_One, Type_One, ID_Two, Type_Two, Score, Total_Votes)
                       VALUES (?, ?, ?, ?, ?, ?)'''
-    cursor.execute(relation_sql, Relation)
+    cursor.execute(relation_sql, [Relation.ID_One, Relation.Type_One, Relation.ID_Two, Relation.Type_Two, Relation.Score, Relation.Total_Votes])
     dbConn.commit()
+    
+def insert_new_relation(): 
     return None 
+
+def check_if_in_db(): 
+    return None
+
+def upvote_db(): 
+    return None
+
+def downvote_db(): 
+    return None 
+
 
 # Update a Relation in the Relations database
 def update_relation(dbConn, Relation): 
