@@ -100,10 +100,20 @@ a {
   text-decoration: none;
 }
 
+h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  /*center h1 in the middle of webpage*/
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  color: #FFFFFF;
+}
+
+
+
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
 }
-
-
