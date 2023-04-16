@@ -1,6 +1,4 @@
- and methods to update and add Relations
-
-import sqlite3
+ import sqlite3
 import relation
 from sqlite3 import Error
 
@@ -48,21 +46,20 @@ def create_relation(dbConn, Relation):
     cursor.execute(relation_sql, [Relation.ID_One, Relation.Type_One, Relation.ID_Two, Relation.Type_Two, Relation.Score, Relation.Total_Votes])
     dbConn.commit()
 
-def check_if_in_db(dbConn, Relation): 
+def get_from_db(dbConn, Relation): 
 
     cursor = dbConn.cursor()
 
     in_db_sql = '''SELECT * FROM Relations WHERE ID_One = ? AND ID_Two = ?'''
 
-    cursor.execute(in_db_sql)
+    cursor.execute(in_db_sql, [ra])
     lists = cursor.fetchall()
-    print(lists)
 
     if lists == None or len(lists) == 0:
         create_relation(dbConn, Relation)
-        return true
+        return 
     else: 
-        return true
+        return 
 
 def upvote_db(dbConn, Relation): 
     if check_if_in_db(dbConn, Relation):
