@@ -2,22 +2,41 @@
 	<div class="content">
 		<section class="info-col">
 			<div class="card-container">
-				<img class="image" src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/xUvSeFhdsJbKFOaHnB9TeTZpJKs.jpg">
+				<img class="image" :src="imageURL1">
 			</div>
 			<div class="card-container">
-				<img class="image" src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/rzRb63TldOKdKydCvWJM8B6EkPM.jpg">
+				<img class="image" :src="imageURL2">
 			</div>
 		</section>
 	</div>
 </template>
+
+<script>
+export default {
+  name: 'RelationCards',
+  props: {
+    imageURL1: {
+      type: String,
+      required: true,
+    },
+    imageURL2: {
+      type: String,
+      required: true,
+    },
+  },
+}
+</script>
   
 <style>
 	.card-container {
 		text-align: center;
-		
+		/*background-color: red;*/
+		display: flex;
+		justify-content: center;
 	}
 
 	.image {
+		
 		border-radius: 5%;
 		max-width: 100%;
     	max-height: 70vh;

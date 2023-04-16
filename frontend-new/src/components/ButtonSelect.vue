@@ -1,23 +1,40 @@
 <template>
 	<div class="content button-container">
 		<section>
-			<div class = " col">
-				<button class = "upvote button">Downvote</button>
+			<div class = " col" @click="onUpvote">
+				<button class = "upvote button">I disagree.</button>
 			</div>
-			<div class = "col">
-				<button class = "question button">IDK</button>
+			<div class = "col" @click="onRefreshButton">
+				<button class = "refresh button">IDK</button>
 			</div>
-			<div class = "col">
-				<button class = "downvote button">Upvote</button>
+			<div class = "col" @click="onDownvote">
+				<button class = "downvote button">I agree!</button>
 			</div>
 		</section>
 	</div>
 </template>
 
+<script>
+export default {
+  name: 'NameCards',
+  methods: {
+	onRefreshButton (event) {
+		this.$emit('refreshed', 'somwValue')
+	},
+	onDownvote (event) {
+		this.$emit('downvoted', 'somwValue')
+	},
+	onUpvote (event) {
+		this.$emit('upvoted', 'somwValue')
+	}
+  }
+}
+</script>
+
 <style>
 	.button-container {
 		height: 50px;
-		padding: 30px;
+		padding-bottom: 30px;
 	}
 
 	.button {
@@ -38,7 +55,6 @@
 	.upvote {
 		border-radius: 20px 0px 0px 20px;
 		background-color: #adc1da;
-		background-image: url("../assets/up.png");
 		background-size: cover;
 	}
 
@@ -47,7 +63,7 @@
 		background-color: #f99a9e	;
 	}
 
-	.question {
+	.refresh {
 		background-color: #F9FCFB;
 	}
 	
