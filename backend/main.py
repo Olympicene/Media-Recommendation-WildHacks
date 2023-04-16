@@ -3,6 +3,7 @@ import os
 import random
 from fastapi import FastAPI
 from dotenv import load_dotenv
+from pydantic import BaseModel
 
 load_dotenv()
 THEMOVIEDB_API_KEY = os.getenv('THEMOVIEDB_API_KEY')
@@ -12,6 +13,18 @@ RAWG_API_KEY = os.getenv('RAWG_API_KEY')
 MAX_MOVIE_ID = 1113623
 MAX_TVSHOW_ID = 224579
 MAX_GAME_ID = 58134
+
+# class Item(BaseModel):
+#     id1: int
+#     type1: str 
+#     id2: int
+#     type2: str 
+class Item(BaseModel):
+    id1: int
+    type1: str | None = None
+    id2: int
+    type2: str | None = None
+ 
 
 # return a ('movie', movieID)
 def random_MovieID():
@@ -47,15 +60,13 @@ def random_GamesID():
 # return a list of 2 multimedia tuples
 def random_multimedia_pair():
 	multimedia = [random_GamesID, random_MovieID, random_TVShowID]
-	#random.choice(multimedia)()
-	#random.choice(multimedia)
-	obj = random.choice(multimedia)() + random.choice(multimedia)()
+	obj = random.choice(multimedia)() + random.choice(multimedia)() 
 	type1, id1, type2, id2 = obj[0], obj[1], obj[2], obj[3]
 	return {
-			"type1" : type1,
 			"id1" : id1,
-			"type2" : type2,
+			"type1" : type1,
 			"id2" : id2,
+			"type2" : type2,
 			"score" : 0,
 			"totalvotes" : 0
 	}
@@ -67,5 +78,13 @@ app = FastAPI()
 @app.get("/rand")
 def random_pair():
     return random_multimedia_pair()
+
+@app.post("/downvote/")
+async def down(item: Item):
+    return item
+
+@app.post("/upvote/")
+async def up(item: Item):
+    return item
 
 # print(random_MovieID())
