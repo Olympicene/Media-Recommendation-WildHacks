@@ -47,12 +47,9 @@ def create_relation(dbConn, Relation):
                       VALUES (?, ?, ?, ?, ?, ?)'''
     cursor.execute(relation_sql, [Relation.ID_One, Relation.Type_One, Relation.ID_Two, Relation.Type_Two, Relation.Score, Relation.Total_Votes])
     dbConn.commit()
-    
-def insert_new_relation(): 
-    return None 
 
 def check_if_in_db(): 
-    return None
+    return None 
 
 def upvote_db(): 
     return None
