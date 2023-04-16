@@ -1,8 +1,9 @@
-db_conn = sqlite3.connect('test_db.db')
-relation = Relation(db_conn, "Type1", 1, "Type2", 2, 3.5, 10)
-assert relation.Type_One == "Type1"
-assert relation.ID_One == 1
-assert relation.Type_Two == "Type2"
-assert relation.ID_Two == 2
-assert relation.Score == 3.5
-assert relation.Total_Votes == 1
+def test_create_connection_valid_path():
+    # Arrange
+    db_file = "test_db.db"
+
+    # Act
+    conn = create_connection(db_file)
+
+    # Assert
+    assert isinstance(conn, sqlite3.Connection)
