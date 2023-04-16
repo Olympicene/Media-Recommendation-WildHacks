@@ -52,14 +52,14 @@ def get_from_db(dbConn, Relation):
 
     in_db_sql = '''SELECT * FROM Relations WHERE ID_One = ? AND ID_Two = ?'''
 
-    cursor.execute(in_db_sql, [ra])
+    cursor.execute(in_db_sql, [Relation.ID_One, Relation.ID_Two])
     lists = cursor.fetchall()
 
     if lists == None or len(lists) == 0:
         create_relation(dbConn, Relation)
-        return 
+        return Relation
     else: 
-        return 
+        return Relation 
 
 def upvote_db(dbConn, Relation): 
     if check_if_in_db(dbConn, Relation):
