@@ -14,7 +14,7 @@ MAX_TVSHOW_ID = 224579
 MAX_GAME_ID = 58134
 
 # return a ('movie', movieID)
-def random_MovieID():
+def Movie():
 	not_valid = True
 	while not_valid:
 		random_id = random.randint(0, MAX_MOVIE_ID)
@@ -23,18 +23,19 @@ def random_MovieID():
 		try:
 			media_object = {
 				"type": 'movie', 
-				"id": response['id'], 
 				"name": response['original_title'], 
-				"image_url": f"https://image.tmdb.org/t/p/original{response['poster_path']}"
+				"id": response['id'], 
+				"imageURL": f"https://image.tmdb.org/t/p/original{response['poster_path']}"
 				}
-			not_valid = False
+			if(response['poster_path'] != "None"):
+				not_valid = False
 		except Exception as e: 
 			print(e)
 
 	return media_object
 
 # return a ('tv_show', tvshowID)
-def random_TVShowID():
+def TVShow():
 	not_valid = True
 	while not_valid:
 		random_id = random.randint(0, MAX_TVSHOW_ID)
@@ -43,18 +44,19 @@ def random_TVShowID():
 		try:
 			media_object = {
 				"type": 'tv_show', 
-				"id": response['id'], 
 				"name": response['name'], 
-				"image_url": f"https://image.tmdb.org/t/p/original{response['poster_path']}"
+				"id": response['id'], 
+				"imageURL": f"https://image.tmdb.org/t/p/original{response['poster_path']}"
 			}
-			not_valid = False
+			if(response['poster_path'] != "None"):
+				not_valid = False
 		except Exception as e: 
 			print(e)
 
 	return media_object
 
 # return a ('videogame', videogameID)
-def random_GamesID():
+def Game():
 	not_valid = True
 	while not_valid:
 		random_id = random.randint(0, MAX_GAME_ID)
@@ -63,14 +65,11 @@ def random_GamesID():
 		try:
 			media_object = {
 				"type": 'videogame',  
-				"id": response['id'], 
 				"name": response['name'], 
-				"image_url": response['background_image']
+				"id": response['id'], 
+				"imageURL": response['background_image']
 			}
 			not_valid = False
 		except Exception as e: 
 			print(e)
-
 	return media_object
-
-print(random_GamesID())
