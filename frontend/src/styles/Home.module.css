@@ -1,14 +1,9 @@
 .main {
-  display: flex;
-  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   padding: 6rem;
   min-height: 100vh;
   background-color: #0D0907;
-  width: fit-content;
-  height: fit-content;
-  overflow:hidden;
 }
 
 .description {
@@ -70,21 +65,6 @@
   border-radius: var(--border-radius);
 }
 
-
-/*
-.card h2 {
-  font-weight: 600;
-  margin-bottom: 0.7rem;
-}
-
-.card p {
-  margin: 0;
-  opacity: 0.6;
-  font-size: 0.9rem;
-  line-height: 1.5;
-  max-width: 30ch;
-}
-*/
 
 .button1::before {
   content: "👍"; /* Add thumbs up emoji */

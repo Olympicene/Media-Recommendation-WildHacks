@@ -9,13 +9,12 @@
 	</footer>
 </template>
 
-  
 <style>
 footer a {
 	text-decoration: none;
-	color: #494949;
+	color: #333333;
 	position: relative;
-	margin-right: 13.333px;
+	margin-right: 15px;
 }
 
 /* FOOTER */
@@ -24,6 +23,10 @@ footer {
 	margin-top: 50px;
 	text-align: right;
 	height: 55px;
+}
+
+footer a:hover {
+	border-bottom: 1px solid;
 }
 </style>
   

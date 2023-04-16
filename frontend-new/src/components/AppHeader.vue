@@ -1,36 +1,46 @@
 <template>
 	<nav class="content">
-		<router-link to="/home">Blog</router-link>
-		<router-link to="/calories">Calories</router-link>
-		<router-link to="/" class="logo-container">
-			<img src="../assets/logo.png" class="logo" />
-		</router-link>
-		<router-link to="/exercise">Exercise</router-link>
-		<router-link to="/about">About</router-link>
+		<router-link to="/calories">Hot</router-link>	
+		<router-link to="/new">New</router-link>	
+		<router-link to="/top">Top</router-link>
+		<router-link to="/calories">Random</router-link>	
+		
+		<div class="nav-right">
+			<router-link to="/calories">Create</router-link>
+		</div>
+		
 	</nav>
 </template>
   
 <style>
+
+/* TOP LEFT */
 nav a {
+	
 	font-size: 18px;
 	text-decoration: none;
-	color: #494949;
+	text-align: center;
+	color: #333333;
 	position: relative;
 	margin-right: 17px;
 }
 
-.logo {
-	height: 30px;
-	margin-top: 15px;
-	margin-bottom: 15px;
-	vertical-align: middle;
+a:hover {
+	border-bottom: 1px solid;
 }
 
 nav {
+	padding-top: 10px;
 	height: 55px;
-	display: flex;
-	justify-content: center;
-	align-items: left;
+	/*display: flex;*/
+	justify-content: left;
+	align-items: center;
+	overflow: hidden;
 }
-</style>
-  
+
+/* RIGHT SIDE */
+.nav-right {
+  float: right;
+}
+
+</style>  

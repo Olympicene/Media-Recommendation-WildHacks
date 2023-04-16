@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
+
+/* /////////////////////////////////////////////////////////////// */
+/* GENERAL */
+html {
+	scroll-behavior: smooth;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+h2,
+p {
+  color: #444444;
+}
+
+body {
+  margin: 0% auto;
+  background: #F9FCFB;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+/* /////////////////////////////////////////////////////////////// */
+/* MOBILE BREAKPOINTS */
+.content {
+  max-width: 70%;
+  margin: 0 auto;
+}
+
+@media only screen and (max-width: 720px) {
+  .content {
+    max-width: 95%;
+  }
+}
+
+@media only screen and (min-width: 1080px) {
+  .content {
+    max-width: 60%;
+  }
+}
+
+/* /////////////////////////////////////////////////////////////// */
+/* Info Colums */
+
+@media (min-width: 1080px) {
+  .info-col {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 100%;
+  }
+}
+
+.info-col div {
+  width: 100%;
+  padding: 10px;
+  /*border: 1px solid black;*/
+}
