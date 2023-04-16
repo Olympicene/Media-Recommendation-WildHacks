@@ -5,7 +5,7 @@
   align-items: center;
   padding: 6rem;
   min-height: 100vh;
-  background-color: #3F3448;
+  background-color: #0D0907;
   width: fit-content;
   height: fit-content;
 }
@@ -54,7 +54,8 @@
   padding-right: 2rem;
   padding-left: 2rem;
   border-radius: var(--border-radius);
-  background: rgba(var(--card-rgb), 0);
+  background-color: #FFFFFF;
+  /* background: rgba(var(--card-rgb), F); */
   border: 1px solid rgba(var(--card-border-rgb), 0);
   transition: background 200ms, border 200ms;
   height: auto;
