@@ -30,27 +30,27 @@ class Relation:
       self.Score = Score
       self.Total_Votes = Total_Votes
 
-    @property
+#    @property
     def Type_One(self):
         return self.Type_One
 
-    @property
+#    @property
     def ID_One(self): 
         return self.ID_One
 
-    @property
+#    @property
     def Type_Two(self): 
         return self.Type_Two
 
-    @property
+#    @property
     def ID_Two(self): 
         return self.ID_Two
     
-    @property
+#    @property
     def Score(self): 
         return self.Score
 
-    @property 
+#    @property 
     def TotalVotes(self): 
         return self.TotalVotes
 

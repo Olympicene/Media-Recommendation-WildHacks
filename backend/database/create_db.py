@@ -1,27 +1,17 @@
-
-
 import sqlite3
 import relation
 from sqlite3 import Error
-
-
-
 # Creating connection to database given
 def create_connection(db_file):
-
     dbConn = None 
-
     try: 
         dbConn = sqlite3.connect(db_file)
         return dbConn
     except Error as e:
         print(e)
-
     return dbConn
-
 # Creating Relation table given connection to a database
 def create_relation_table(dbConn): 
-
     create_relations_table_sql = """ CREATE TABLE IF NOT EXISTS Relations (
                                      ID_One INTEGER NOT NULL,
                                      Type_One TEXT NOT NULL, 
@@ -30,14 +20,11 @@ def create_relation_table(dbConn):
                                      Score INTEGER NOT NULL, 
                                      Total_Votes INTEGER NOT NULL 
                                     ); """ 
-
     try: 
         c = dbConn.cursor()
         c.execute(create_relations_table_sql)
     except Error as e: 
         print(e)
-
-
 # Insert row into media database
 def create_relation(dbConn, Relation): 
      
@@ -47,62 +34,68 @@ def create_relation(dbConn, Relation):
                       VALUES (?, ?, ?, ?, ?, ?)'''
     cursor.execute(relation_sql, [Relation.ID_One, Relation.Type_One, Relation.ID_Two, Relation.Type_Two, Relation.Score, Relation.Total_Votes])
     dbConn.commit()
-
-def check_if_in_db(dbConn, Relation): 
-
+def get_from_db(dbConn, Relation): 
     cursor = dbConn.cursor()
 
     in_db_sql = '''SELECT * FROM Relations WHERE ID_One = ? AND ID_Two = ?'''
 
-    cursor.execute(in_db_sql)
+    cursor.execute(in_db_sql, [Relation.ID_One, Relation.ID_Two])
     lists = cursor.fetchall()
-    print(lists)
 
     if lists == None or len(lists) == 0:
         create_relation(dbConn, Relation)
-        return true
+        return Relation
     else: 
-        return true
+         return Relation 
 
 def upvote_db(dbConn, Relation): 
-    if check_if_in_db(dbConn, Relation):
+    if get_from_db(dbConn, Relation):
         new_score = Relation.Score + 1
         new_total_votes = Relation.Total_Votes + 1  
         update_sql = '''UPDATE Relations 
                         SET Score = ? ,
                         Total_Votes = ?'''
         cursor = dbConn.cursor()
-
         cursor.execute(update_sql, [new_score, new_total_votes])
     else: 
         print("Relation doesn't exist.")
-
-def downvote_db(): 
-    if check_if_in_db(dbConn, Relation): 
+def downvote_db(dbConn, Relation): 
+    if get_from_db(dbConn, Relation): 
         new_score = Relation.Score - 1
         new_total_votes = Relation.Total_Votes + 1 
         update_sql = '''UPDATE Relations 
                         SET Score = ? ,
                         Total_Votes = ?'''
         cursor = dbConn.cursor()
-
         cursor.execute(update_sql, [new_score, new_total_votes])
     else: 
         print("Relation doesn't exist")
-
-
-
 # Update a Relation in the Relations database
 def update_relation(dbConn, Relation): 
-
     cursor = dbConn.cursor()
-
     relation_sql = ''' UPDATE Relations
                        SET Type_One = ? ,  
                            Type_Two = ? , 
                            Score = ? , 
                            Total_Votes = ?
                         WHERE ID_One = ? AND ID_Two = ?'''
-
     cursor.execute(relation_sql, Relation)
     dbConn.commit()
+
+def convert_to_dict(Relation):
+    relationdict = {
+                    "id_1": Relation.ID_One,
+                    "type_1": Relation.Type_One,
+                    "id_2": Relation.ID_Two,
+                    "type_2": Relation.Type_Two,
+                    "score": Relation.Score,
+                    "totalvotes": Relation.Total_Votes
+                    }
+    
+    return relationdict
+
+def convert_to_relation(relationdict):
+    relation_obj = relation.Relation(relationdict[0], relationdict[1], relationdict[2], relationdict[3], relationdict[4],
+                                     relationdict[[5]])
+    return relation_obj
+        
